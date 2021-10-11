@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row d-lg-flex">
+    <div class="col-lg-6 mt-4">
+            <div class="container shadow-lg p-4 mb-2 rounded ">
+                <div class="p-2 bg-dark text-light">
+                    <h3 class="task-title text-center">ADD TASK</h3>
+                    <form class="form " method="post">
+                        {% csrf_token %}
+                        <div class="form-group container">
+                            <label for="task_name">Task Name</label>
+                            <input type="text" class="form-control task-input" id="task_name" placeholder="Task Name"
+                                   name="task_name">
+
+                        </div>
+                        <div class="form-group container">
+                            <label for="task_priority">Task Priority</label>
+                            <input type="text" class="form-control task-input" id="task_priority" placeholder="Enter Your Priority"
+                                   name="task_priority">
+
+                        </div>
+                        <div class="form-group container">
+                            <label for="task_date">Select Date</label>
+                            <input type="date" class="form-control task-input" id="task_date" placeholder="Enter Date"
+                                   name="task_date">
+
+                        </div>
+                        <div class="text-center m-2"><input class="btn btn-primary" type="submit" value="Add Task">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mt-4">
+            <h3 class="task-title text-center">TASKS</h3>
+            <div class="container shadow-lg p-4 rounded ">
+                
+                   
+                    <div class="card bg-dark text-light">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <div class="row d-flex">
+                                    <div class="col-6">
+                                        Task
+                                        </div>
+                                    <div class="col-3">Priority</div>
+                                    <div class="col-3">
+                                        Action
+                                    </div>
+                                </div>
+                                
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            {% for i in task %}
+
+            
+
+            <div class="container shadow-lg p-4 mb-2 rounded ">
+                <div class="p-2 bg-dark text-light">
+                   
+                    <div class="card bg-dark">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <div class="row d-flex">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            {{i.task_name}}
+                                        </div>
+                                        
+                                        <div class="row">
+                                            ({{i.task_date}})
+                                        </div>
+                                        </div>
+                                    <div class="col-3">{{i.task_priority}}</div>
+                                    <div class="col-3">
+                                        <a class="p-4" href="{% url 'todo_app:update' i.id %}"><i style="color: greenyellow;" class="fas fa-pencil-alt"></i></a>
+                                        <a  href="{% url 'todo_app:delete' i.id %}"><i style="color: red;" class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <h2 class="text-center task-title mt-4">No Task Added</h2>
+
+{% endfor %}
+
+
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

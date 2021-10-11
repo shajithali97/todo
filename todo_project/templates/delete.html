@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container text-center ">
+    <div class="card p-3 bg-dark text-light">
+    <div class="form">
+        <form action="" method="post">
+            {% csrf_token %}
+            Are you Complete this task?
+            <br>
+            <h3>TASK NAME:{{task.task_name}}</h3>
+            <input type="submit" value="Delete" class="btn btn-danger">
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}
+    
